@@ -1,0 +1,119 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+//Complete the following function.
+
+
+void calculate_the_maximum(int n, int k) {
+    int factorial(int);
+int combination(int);
+    int a, b, m=0, o, i, j, p;
+    p=combination(n);
+    int arrand[p], arror[p], arrxor[p];
+   for(a=1;a<n;a++)
+   {
+       for(b=1;b<=n;b++)
+       {
+         if(a>=b)
+         {continue;}
+           arrand[m]=a&b;
+           arror[m]=a|b;
+           arrxor[m]=a^b;
+           m++;
+       }
+   }
+   for(i=0;i<m;i++)
+   {
+       for(j=0;j<m-1;j++)
+       {
+           if(arrand[j]>arrand[j+1])
+           {
+               o=arrand[j];
+               arrand[j]=arrand[j+1];
+               arrand[j+1]=o;
+           }
+       }
+   }
+   for(i=0;i<m;i++)
+   {
+       for(j=0;j<m-1;j++)
+       {
+           if(arrxor[j]>arrxor[j+1])
+           {
+               o=arrxor[j];
+               arrxor[j]=arrxor[j+1];
+               arrxor[j+1]=o;
+           }
+       }
+   }
+   for(i=0;i<m;i++)
+   {
+       for(j=0;j<m-1;j++)
+       {
+           if(arror[j]>arror[j+1])
+           {
+               o=arror[j];
+               arror[j]=arror[j+1];
+               arror[j+1]=o;
+           }
+       }
+   }
+
+   for(i=m-1;i>=0;i--)
+   {
+       if(arrand[i]<k)
+       {
+           printf("%d\n", arrand[i]);
+           break;
+       }
+       if(i==0)
+           {printf("0\n");}
+   }
+   for(i=m-1;i>=0;i--)
+   {
+       if(arror[i]<k)
+       {
+           printf("%d\n", arror[i]);
+           break;
+       }
+       if(i==0)
+           {printf("0\n");}
+
+   }
+   for(i=m-1;i>=0;i--)
+   {
+       if(arrxor[i]<k)
+       {
+           printf("%d\n", arrxor[i]);
+           break;
+       }
+       if(i==0)
+           {printf("0\n");}
+   }
+
+   }
+   int combination(int n)
+   {
+       int product;
+       product=factorial(n)/(factorial(2)*factorial(n-2));
+       return product;
+   }
+   int factorial(int n)
+   {
+       int result;
+       if(n==1)
+       return 1;
+       result=n*factorial(n-1);
+       return result;
+   }
+
+
+
+int main() {
+    int n, k;
+   n=75;
+   k=4;
+    calculate_the_maximum(n, k);
+
+    return 0;}
